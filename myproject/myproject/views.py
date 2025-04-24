@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 import wikipedia
+import math
 from io import BytesIO
 from docx import Document
 from docx.shared import Pt, Inches
