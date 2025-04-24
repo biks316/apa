@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APA Report Generator</title>
+
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header class="bg-blue-700 text-white py-6 shadow-lg">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-bold tracking-wide">MyCompany AI Tools</h1>
+            <p class="mt-2 text-lg">Generate professional APA-style reports in seconds</p>
+        </div>
+    </header>
+
+    <!-- Main Form -->
+    <main class="container mx-auto py-12 px-4">
+        <div class="flex justify-center">
+            <div class="w-full max-w-2xl bg-white p-8 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-bold text-center mb-6">Create Your Report</h2>
+                <form method="post" action="{% url 'create_apa_report' %}">
+                    {% csrf_token %}
+
+                    <!-- Report Topic -->
+                    <div class="mb-4">
+                        <label for="topic" class="block text-sm font-semibold text-gray-700">Report Topic</label>
+                        <input type="text" id="topic" name="topic" class="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+
+                    <!-- Prompt -->
+                    <div class="mb-4">
+                        <label for="prompt" class="block text-sm font-semibold text-gray-700">Short Prompt / Description</label>
+                        <textarea id="prompt" name="prompt" rows="4" class="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                    </div>
+
+                    <!-- Checkbox -->
+                    <div class="mb-6 flex items-center">
+                        <input type="checkbox" id="generate_ppt" name="generate_ppt" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <label for="generate_ppt" class="ml-2 text-sm text-gray-800">
+                            Also generate a PowerPoint version
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="flex justify-center">
+                        <button type="submit" class="bg-blue-700 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200 shadow-md">
+                            Generate Report
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-700 text-white py-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 MyCompany. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

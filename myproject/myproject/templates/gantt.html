@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VISTA Project Timeline - Gantt Chart</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <script type="text/javascript">
+    google.charts.load("current", {"packages":["gantt"]});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function daysToMilliseconds(days) {
+      return days * 24 * 60 * 60 * 1000;
+    }
+
+    function drawChart() {
+      const data = new google.visualization.DataTable();
+      data.addColumn("string", "Task ID");
+      data.addColumn("string", "Task Name");
+      data.addColumn("string", "Resource");
+      data.addColumn("date", "Start Date");
+      data.addColumn("date", "End Date");
+      data.addColumn("number", "Duration");
+      data.addColumn("number", "Percent Complete");
+      data.addColumn("string", "Dependencies");
+
+      data.addRows([
+        ["W1", "Project Setup & Planning", "Planning", new Date(2025, 2, 3), new Date(2025, 2, 9), null, 100, null],
+        ["W2", "Resume Upload & Parsing", "Backend", new Date(2025, 2, 10), new Date(2025, 2, 16), null, 100, "W1"],
+        ["W3", "Text Preprocessing & Tokenization", "NLP", new Date(2025, 2, 17), new Date(2025, 2, 23), null, 100, "W2"],
+        ["W4", "Embedding & Vector Analysis", "AI", new Date(2025, 2, 24), new Date(2025, 2, 30), null, 100, "W3"],
+        ["W5", "Scoring & Matching Algorithms", "AI", new Date(2025, 2, 31), new Date(2025, 3, 6), null, 100, "W4"],
+        ["W6", "Dashboard & Visualization", "Frontend", new Date(2025, 3, 7), new Date(2025, 3, 13), null, 75, "W5"],
+        ["W7", "Testing & Debugging", "QA", new Date(2025, 3, 14), new Date(2025, 3, 20), null, 0, "W6"],
+        ["W8", "Final Polishing & Documentation", "Delivery", new Date(2025, 3, 21), new Date(2025, 3, 27), null, 0, "W7"]
+      ]);
+
+      const options = {
+        height: 450,
+        gantt: {
+          trackHeight: 40,
+          labelStyle: {
+            fontName: "Roboto",
+            fontSize: 14,
+            color: "#333"
+          },
+          criticalPathEnabled: true,
+          criticalPathStyle: {
+            stroke: '#e64a19',
+            strokeWidth: 3
+          }
+        }
+      };
+
+      const chart = new google.visualization.Gantt(document.getElementById("gantt_chart"));
+      chart.draw(data, options);
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2 style="text-align: center; color: #007bff;">VISTA - 8 Week Gantt Timeline</h2>
+    <div id="gantt_chart"></div>
+  </div>
+</body>
+</html>
