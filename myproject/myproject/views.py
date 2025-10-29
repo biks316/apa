@@ -83,6 +83,10 @@ def generate_docx_report(topic, prompt):
     buffer.seek(0)
     return buffer
 
+def test(request):
+    return HttpResponse("test working.... really", status=200)
+    
+
 def create_apa_report(request):
     if request.method == "POST":
         topic = request.POST.get("topic", "Untitled Report")
