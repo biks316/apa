@@ -26,33 +26,25 @@
         <div class="flex justify-center">
             <div class="w-full max-w-2xl bg-white p-8 rounded-xl shadow-lg">
                 <h2 class="text-2xl font-bold text-center mb-6">Create Your Report</h2>
-                <form method="post" action="{% url 'create_apa_report' %}">
+                <form method="post" action="/generate/fetch/">
                     {% csrf_token %}
 
-                    <!-- Report Topic -->
+                    <!-- Wikipedia Topic -->
                     <div class="mb-4">
-                        <label for="topic" class="block text-sm font-semibold text-gray-700">Report Topic</label>
+                        <label for="topic" class="block text-sm font-semibold text-gray-700">Wikipedia Topic</label>
                         <input type="text" id="topic" name="topic" class="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     </div>
 
-                    <!-- Prompt -->
+                    <!-- Optional: Max Sentences -->
                     <div class="mb-4">
-                        <label for="prompt" class="block text-sm font-semibold text-gray-700">Short Prompt / Description</label>
-                        <textarea id="prompt" name="prompt" rows="4" class="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
-                    </div>
-
-                    <!-- Checkbox -->
-                    <div class="mb-6 flex items-center">
-                        <input type="checkbox" id="generate_ppt" name="generate_ppt" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                        <label for="generate_ppt" class="ml-2 text-sm text-gray-800">
-                            Also generate a PowerPoint version
-                        </label>
+                        <label for="max_sentences" class="block text-sm font-semibold text-gray-700">Max Sentences (default 5)</label>
+                        <input type="number" id="max_sentences" name="max_sentences" min="1" max="20" class="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
                     <!-- Submit Button -->
                     <div class="flex justify-center">
                         <button type="submit" class="bg-blue-700 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200 shadow-md">
-                            Generate Report
+                            Fetch & Store Wikipedia Data
                         </button>
                     </div>
                 </form>

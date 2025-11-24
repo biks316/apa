@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'dash'
+    'dash',
+    'ext_adapter',
+    'formatter',
+    'generate_store'
 ]
 
 MIDDLEWARE = [

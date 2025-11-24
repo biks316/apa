@@ -30,6 +30,9 @@ from django.urls import path, include  # 👈 include is needed
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/', include('dash.urls')),
+    path('', views.welcome, name='welcome'),
+    # Expose the generate_store app API under /generate/
+    path('generate/', include('generate_store.urls', namespace='generate_store')),
    path('dash/', views.home, name='home'),  # Root route for your app
    path('gantt/', views.gantt, name='gantt'), 
    path('welcome/', views.welcome, name='welcome'), 
