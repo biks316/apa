@@ -1,0 +1,276 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EduPlatform — Learn & Grow</title>
+  <meta name="description" content="Interactive courses, expert instructors, and certificates to power your career." />
+  <style>
+    :root{
+      --purple:#667eea;
+      --indigo:#764ba2;
+      --accent:#ff6b6b;
+      --muted:#6b7280;
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --maxw:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;
+      color:#111827;
+      background:linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+    /* Nav */
+    nav{
+      position:sticky;top:0;background:linear-gradient(90deg,var(--purple),var(--indigo));
+      color:#fff;padding:14px 0;z-index:40;box-shadow:0 6px 18px rgba(20,23,32,0.06)
+    }
+    nav .container{display:flex;align-items:center;justify-content:space-between}
+    .logo{font-weight:700;font-size:1.15rem;display:flex;align-items:center;gap:10px}
+    .logo img{height:34px}
+    .nav-links{display:flex;gap:18px;align-items:center}
+    .nav-links a{color:#fff;text-decoration:none;font-weight:600;opacity:0.95}
+    .cta{background:var(--accent);border:none;color:#fff;padding:8px 16px;border-radius:999px;font-weight:700;cursor:pointer}
+    .menu-toggle{display:none;background:none;border:0;color:#fff;font-size:1.4rem}
+    /* Hero */
+    .hero{padding:72px 0;display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center}
+    .hero h1{font-size:2.6rem;line-height:1.02;margin-bottom:12px;color:#08102a}
+    .hero p{color:var(--muted);margin-bottom:20px;font-size:1.05rem}
+    .hero .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .card{
+      background:var(--card);border-radius:14px;padding:18px;box-shadow:0 8px 30px rgba(16,24,40,0.06)
+    }
+    .hero-image{
+      height:100%;min-height:300px;border-radius:14px;background:linear-gradient(135deg,var(--purple),var(--indigo));
+      display:flex;align-items:center;justify-content:center;color:#fff;font-size:2rem;overflow:hidden;
+    }
+    .hero-image img{width:100%;height:100%;object-fit:cover;display:block}
+    /* Features */
+    .features{padding:64px 0}
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .feature{padding:20px;border-radius:12px;background:linear-gradient(180deg,#fff, #fcfdff);box-shadow:0 6px 18px rgba(12,15,20,0.04);text-align:center}
+    .feature .icon{font-size:28px;margin-bottom:10px}
+    .feature h3{margin:6px 0;color:var(--purple)}
+    .feature p{color:var(--muted);font-size:0.95rem}
+    /* Courses */
+    .courses{padding:64px 0}
+    .courses-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+    .course{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 8px 30px rgba(12,15,20,0.06)}
+    .course .thumb{height:150px;background:linear-gradient(135deg,var(--purple),var(--indigo));display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px}
+    .course .meta{padding:16px}
+    .course h4{margin:0 0 8px;font-size:1.05rem}
+    .course p{margin:0 0 12px;color:var(--muted);font-size:0.95rem}
+    .course .info{display:flex;justify-content:space-between;align-items:center;font-weight:700;color:var(--purple)}
+    /* Stats */
+    .stats{background:linear-gradient(90deg,var(--purple),var(--indigo));color:#fff;padding:40px;border-radius:12px;margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+    .stat h2{margin:0;font-size:1.6rem}
+    .stat p{margin:6px 0 0;color:rgba(255,255,255,0.85)}
+    /* Footer */
+    footer{padding:48px 0;color:#6b7280}
+    footer .foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    footer a{text-decoration:none;color:inherit}
+    /* Responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;padding:48px 0}
+      .menu-toggle{display:block}
+      .nav-links{display:none;position:absolute;left:0;right:0;top:64px;background:linear-gradient(90deg,var(--purple),var(--indigo));padding:12px;border-bottom-left-radius:12px;border-bottom-right-radius:12px}
+      .nav-links a{display:block;padding:10px 16px}
+      .hero-image{min-height:220px}
+      .cta{padding:10px 14px}
+    }
+  </style>
+</head>
+<body>
+  <nav role="navigation" aria-label="Main">
+    <div class="container">
+      <div class="logo"><img src="{% static 'img/logo.png' %}" alt="logo" onerror="this.style.display='none'">EduPlatform</div>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-label="Toggle menu">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#courses">Courses</a>
+        <a href="#contact">Contact</a>
+        <a href="#signup" class="cta">Sign up</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero" id="home">
+      <div>
+        <h1>Learn Without Limits</h1>
+        <p>Interactive courses, expert instructors, and recognized certificates — designed to help you grow your skills and career.</p>
+        <div class="actions">
+          <a class="cta" href="#courses">Browse Courses</a>
+          <a class="card" href="#features" style="text-decoration:none;color:inherit">Why choose us</a>
+        </div>
+
+        <div style="margin-top:20px">
+          <div class="card" style="display:flex;gap:12px;align-items:center;">
+            <img src="{% static 'img/trust-badge.png' %}" alt="trust" style="height:48px;width:48px;border-radius:8px;object-fit:cover" onerror="this.style.display='none'">
+            <div>
+              <div style="font-weight:700">Trusted by professionals</div>
+              <div style="color:var(--muted);font-size:0.95rem">Over 50,000 learners worldwide</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-image card" aria-hidden="true">
+        <picture>
+          <source srcset="/static/img/images/collage.png" type="image/png">
+          <img src="/static/img/images/collage.png" alt="Learning illustration" onerror="this.style.fontSize='48px';this.remove();this.parentElement.textContent='🎓'">
+        </picture>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <h2 style="text-align:center;font-size:1.8rem;margin-bottom:18px">Why Choose EduPlatform?</h2>
+      <div class="features-grid">
+        <div class="feature">
+          <div class="icon">📚</div>
+          <h3>Comprehensive Curriculum</h3>
+          <p>From fundamentals to advanced topics — structured modules and hands-on projects.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">⏰</div>
+          <h3>Flexible Learning</h3>
+          <p>Learn at your pace with on-demand lessons and lifetime access.</p>
+        </div>
+        <div class="feature">
+          <div class="icon">🏅</div>
+          <h3>Recognized Certificates</h3>
+          <p>Earn certificates to showcase your skills to employers and peers.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="courses" id="courses">
+      <h2 style="text-align:center;font-size:1.8rem;margin-bottom:18px">Popular Courses</h2>
+      <div class="courses-grid">
+        <article class="course">
+          <div class="thumb">
+            <img src="{% static 'img/course-web.png' %}" alt="Web Dev" style="width:100%;height:100%;object-fit:cover" onerror="this.remove();this.parentElement.textContent='💻'">
+          </div>
+          <div class="meta">
+            <h4>Web Development</h4>
+            <p>HTML, CSS, JavaScript, and modern frameworks to build real projects.</p>
+            <div class="info"><span>⭐ 4.8</span><span>$49</span></div>
+          </div>
+        </article>
+
+        <article class="course">
+          <div class="thumb"> 
+            <img src="{% static 'img/course-python.png' %}" alt="Python" style="width:100%;height:100%;object-fit:cover" onerror="this.remove();this.parentElement.textContent='🐍'">
+          </div>
+          <div class="meta">
+            <h4>Python Programming</h4>
+            <p>From basics to advanced topics: data, automation, and APIs.</p>
+            <div class="info"><span>⭐ 4.9</span><span>$59</span></div>
+          </div>
+        </article>
+
+        <article class="course">
+          <div class="thumb">
+            <img src="{% static 'img/course-design.png' %}" alt="Design" style="width:100%;height:100%;object-fit:cover" onerror="this.remove();this.parentElement.textContent='🎨'">
+          </div>
+          <div class="meta">
+            <h4>UI / UX Design</h4>
+            <p>Create engaging interfaces and learn design thinking.</p>
+            <div class="info"><span>⭐ 4.7</span><span>$44</span></div>
+          </div>
+        </article>
+      </div>
+
+      <div style="margin-top:18px">
+        <div class="stats" role="region" aria-label="Site statistics">
+          <div class="stat"><h2>50K+</h2><p>Active Students</p></div>
+          <div class="stat"><h2>500+</h2><p>Courses</p></div>
+          <div class="stat"><h2>100+</h2><p>Instructors</p></div>
+          <div class="stat"><h2>4.8★</h2><p>Average Rating</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="signup" style="padding:48px 0;display:grid;place-items:center">
+      <div class="card" style="width:100%;max-width:760px;text-align:center">
+        <h3 style="margin-bottom:8px">Ready to start?</h3>
+        <p style="color:var(--muted);margin-bottom:16px">Join thousands of learners and take the next step in your career.</p>
+        <form method="post" action="#" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+          <input type="email" name="email" placeholder="you@example.com" required style="padding:10px 12px;border-radius:8px;border:1px solid #e6e9ef;min-width:220px">
+          <button class="cta" type="submit">Get started — it's free</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap">
+        <div style="min-width:200px">
+          <strong>EduPlatform</strong>
+          <p style="color:var(--muted);margin-top:8px">High-quality online courses to advance your skills.</p>
+        </div>
+        <div class="foot-grid" style="flex:1">
+          <div>
+            <h4 style="margin-bottom:8px">Learn</h4>
+            <ul style="list-style:none;padding:0;margin:0;color:var(--muted)">
+              <li><a href="#courses">All courses</a></li>
+              <li><a href="#features">Categories</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="margin-bottom:8px">Company</h4>
+            <ul style="list-style:none;padding:0;margin:0;color:var(--muted)">
+              <li><a href="#">About</a></li>
+              <li><a href="#">Careers</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="margin-bottom:8px">Support</h4>
+            <ul style="list-style:none;padding:0;margin:0;color:var(--muted)">
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:24px;color:var(--muted)">
+        &copy; {{ now.year }} EduPlatform. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+      menuToggle.addEventListener('click', function(){
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!expanded));
+        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        navLinks.style.flexDirection = 'column';
+      });
+
+      // smooth scroll for internal links
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const href = this.getAttribute('href');
+          if(href.length>1){
+            const el = document.querySelector(href);
+            if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); if(window.innerWidth<900) navLinks.style.display='none'; }
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

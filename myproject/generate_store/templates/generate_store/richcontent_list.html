@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rich Content</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-bold mb-6">Rich Content</h1>
+        <div class="grid grid-cols-1 gap-4">
+            {% for item in items %}
+            <div class="bg-white p-4 rounded shadow">
+                <h2 class="text-xl font-semibold"><a href="{% url 'generate_store:richcontent_detail' item.pk %}" class="text-blue-600 hover:underline">{{ item.title }}</a></h2>
+                <div class="text-sm text-gray-600">Topic: {{ item.topic.name if item.topic }}</div>
+                <div class="mt-2 text-gray-800">{{ item.excerpt|truncatechars:200 }}</div>
+                <div class="mt-2 text-xs text-gray-500">Created: {{ item.created_at }}</div>
+            </div>
+            {% empty %}
+            <div class="text-gray-500">No rich content found.</div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

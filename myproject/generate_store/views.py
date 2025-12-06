@@ -26,7 +26,7 @@ def autocomplete_suggestions(request):
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from django.utils.text import slugify
-from .models import FetchedDocument, Topic
+from .models import FetchedDocument, Topic, RichContent
 
 import hashlib
 import logging
@@ -156,6 +156,18 @@ def list_documents(request):
 		'topics': topics,
 		'sidebar_tables': sidebar_tables,
 	})
+
+
+def richcontent_list(request):
+	"""Render a list of RichContent entries."""
+	items = RichContent.objects.select_related('topic').order_by('-created_at')
+	return render(request, 'generate_store/richcontent_list.html', {'items': items})
+
+
+def richcontent_detail(request, pk: int):
+	"""Render a single RichContent entry."""
+	item = get_object_or_404(RichContent, pk=pk)
+	return render(request, 'generate_store/richcontent_detail.html', {'item': item})
 
 
 def document_detail(request, pk: int):

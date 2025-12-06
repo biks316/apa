@@ -31,6 +31,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/', include('dash.urls')),
     path('', views.welcome, name='welcome'),
+    path('landing/', views.landing, name='landing'),
     # Expose the generate_store app API under /generate/
     path('generate/', include('generate_store.urls', namespace='generate_store')),
    path('dash/', views.home, name='home'),  # Root route for your app

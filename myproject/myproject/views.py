@@ -8,6 +8,9 @@ from docx.shared import Pt, Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 
+def landing(request):
+    return render(request, 'landing.html')
+
 def home(request):
     return render(request, 'dash.html')
 

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ item.title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto py-8">
+        <a href="{% url 'generate_store:richcontent_list' %}" class="text-blue-600 hover:underline">&larr; Back</a>
+        <div class="bg-white p-6 rounded shadow mt-4">
+            <h1 class="text-3xl font-bold mb-4">{{ item.title }}</h1>
+            <div class="text-sm text-gray-600 mb-4">Topic: {{ item.topic.name if item.topic }}</div>
+            <div class="prose max-w-none">{{ item.content|safe }}</div>
+            <div class="mt-6 text-xs text-gray-500">Created: {{ item.created_at }} — Updated: {{ item.updated_at }}</div>
+        </div>
+    </div>
+</body>
+</html>

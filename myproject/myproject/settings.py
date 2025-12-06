@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'dash',
     'ext_adapter',
     'formatter',
-    'generate_store'
+    'generate_store',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

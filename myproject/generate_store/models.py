@@ -1,5 +1,9 @@
 from django.db import models
 from django.utils import timezone
+try:
+	from ckeditor.fields import RichTextField
+except Exception:  # pragma: no cover - graceful fallback if package missing
+	RichTextField = None
 
 
 # Models to store fetched data and metadata for efficient retrieval by topic
@@ -77,3 +81,27 @@ class FetchedDocument(models.Model):
 		"""Update last_accessed timestamp for simple LRU-like tracking."""
 		self.last_accessed = timezone.now()
 		self.save(update_fields=["last_accessed"])
+
+
+class RichContent(models.Model):
+	"""A simple model that stores rich HTML content using CKEditor.
+
+	If `django-ckeditor` is not installed, falls back to a plain TextField.
+	"""
+
+	topic = models.ForeignKey(Topic, null=True, blank=True, on_delete=models.SET_NULL, related_name="rich_contents")
+	title = models.CharField(max_length=500)
+	if RichTextField is not None:
+		content = RichTextField(blank=True)
+	else:
+		# fallback so project can still run without ckeditor installed
+		content = models.TextField(blank=True, help_text="Install django-ckeditor for rich editing")
+	excerpt = models.TextField(blank=True)
+	created_at = models.DateTimeField(auto_now_add=True)
+	updated_at = models.DateTimeField(auto_now=True)
+
+	class Meta:
+		ordering = ["-created_at"]
+
+	def __str__(self) -> str:  # pragma: no cover - trivial
+		return self.title
