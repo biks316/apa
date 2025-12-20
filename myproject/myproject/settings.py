@@ -9,6 +9,10 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+import warnings
+from bs4 import GuessedAtParserWarning
+
+warnings.filterwarnings("ignore", category=GuessedAtParserWarning)
 
 from pathlib import Path
 
@@ -37,7 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'dash'
+    'dash',
+    'apa_core'
 ]
 
 MIDDLEWARE = [

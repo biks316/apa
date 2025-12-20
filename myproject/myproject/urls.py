@@ -33,5 +33,7 @@ urlpatterns = [
    path('dash/', views.home, name='home'),  # Root route for your app
    path('gantt/', views.gantt, name='gantt'), 
    path('welcome/', views.welcome, name='welcome'), 
-   path('', views.create_apa_report, name='create_apa_report'),    
+   path('apa/', views.create_apa_report, name='create_apa_report'),
+   path('hi/', include('apa_core.urls')),
+   
 ]
