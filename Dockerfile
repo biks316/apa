@@ -15,6 +15,13 @@ RUN apt-get update \
 COPY myproject/requirements.txt /app/requirements.txt
 RUN pip install --upgrade pip \
     && pip install --no-cache-dir -r /app/requirements.txt
+# Install system dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+       build-essential \
+       netcat-openbsd \
+       libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy project
 COPY . /app
